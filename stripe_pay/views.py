@@ -22,8 +22,8 @@ def get_stripe_session_id(request, item_id):
             'quantity': 1,
         }],
         mode='payment',
-        success_url='http://0.0.0.0:8000/success/',
-        cancel_url='http://0.0.0.0:8000/cancel/',
+        success_url=request.build_absolute_uri('/success/'),
+        cancel_url=request.build_absolute_uri('/cancel/'),
     )
     return JsonResponse({'id': session.id})
 
@@ -32,3 +32,11 @@ def get_item_html(request, item_id):
     item = Item.objects.get(pk=item_id)
     publishable_key = settings.PB_STRIPE_API_KEY
     return render(request, 'item.html', {'item': item, 'publishable_key': publishable_key})
+
+
+def success(request):
+    return render(request, 'success.html')
+
+
+def cancel(request):
+    return render(request, 'cancel.html')
