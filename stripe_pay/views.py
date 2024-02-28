@@ -22,8 +22,8 @@ def get_stripe_session_id(request, item_id):
             'quantity': 1,
         }],
         mode='payment',
-        success_url='http://localhost:8000/success/',
-        cancel_url='http://localhost:8000/cancel/',
+        success_url='http://0.0.0.0:8000/success/',
+        cancel_url='http://0.0.0.0:8000/cancel/',
     )
     return JsonResponse({'id': session.id})
 
