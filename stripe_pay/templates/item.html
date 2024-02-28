@@ -1,0 +1,34 @@
+{% load static %}
+<html>
+  <head>
+    <title>{{ item.name }}</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="{% static 'css/card.css' %}" rel="stylesheet">
+  </head>
+  <body>
+     <div class="container">
+      <div class="wrapper">
+        <h1>{{ item.name }}</h1>
+        <p>{{ item.description }}</p>
+        <p>PRICE: {{ item.price }} {{ item.currency }}</p>
+       </div>
+       <div class="button-wrapper">
+         <button id="buy-button" class="btn fill">BUY</button>
+         <script type="text/javascript">
+             var stripe = Stripe('{{ publishable_key }}');
+             var buyButton = document.getElementById('buy-button');
+             buyButton.addEventListener('click', function() {
+               fetch('/buy/{{ item.id }}/', { method: 'GET' })
+                 .then(response => response.json())
+                 .then(session => {
+                   if (session && session.id) {
+                     stripe.redirectToCheckout({ sessionId: session.id });
+                   }
+                 });
+             });
+         </script>
+       </div>
+         </div>
+     </div>
+  </body>
+</html>
