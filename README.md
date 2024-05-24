@@ -1,5 +1,4 @@
-<h1 align="center">RishatTest<br>
-  Интеграция Stripe</h1> 
+<h1 align="center">Stripe Integration</h1> 
 <h2 align="left">Для запуска проекта необходимо:</h2>
   
 • Установить виртуальное окружение в корневой папке проекта командой:
